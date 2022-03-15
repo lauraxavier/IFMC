@@ -1,93 +1,61 @@
 import React from 'react';
-import * as Style from './style';
-import InputAdornment from '@mui/material/InputAdornment';
-import FormControl from '@mui/material/FormControl';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import IconButton from '@mui/material/IconButton';
-import LockOpenIcon from '@mui/icons-material/LockOpen';
-import MailOutlineIcon from '@mui/icons-material/MailOutline';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import Input from '../../components/Ui/Input'
+import Button from '../../components/Ui/Button'
+import styled, {useTheme} from "styled-components/macro";
+import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 
-
-export default function Login(...props){
-  const { control, handleSubmit } = useForm();
-
-  const [show, setShow] = React.useState({
-    showPassword: false,
+export default () => {
+  const { register, handleSubmit } = useForm();
+  const [values, setValues] = React.useState({
+    email: '',
+    password: '',
   });
 
-  const handleClickShowPassword = (props) => {
-    setShow({
-      showPassword: !show.showPassword,
-    });
-  };
+  const onSubmit = (data) =>{
+    console.log(data);
+    console.log('data');
+  }
 
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
-
-  const classes = Style.useStyles()
+  const setValue = (key, value) =>{
+    setValues({
+      ...values,
+      [key]:value
+    })
+  }
 
   return(
-    <form onSubmit={handleSubmit(props.onSubmit)}>
-      <Controller
-        name='email'
-        control={control}
-        defaultValue=''
-        render={({ field: { onChange, value }, fieldState: { error } }) => (
-          <FormControl color='white'>
-            <Style.Label htmlFor="outlined-adornment-password">
-              <MailOutlineIcon color='white' sx={{ mr: 2,  }} />e-mail
-            </Style.Label>
-            <OutlinedInput
-              name='email'
-              sx={{ input: { color: '#ffffff'}}}
-              classes={classes}
-              type={'text'}
-              color="white"
-              value={props.values.email}
-              onChange={props.onChange}
-              label="email email"
-              endAdornment={
-                <Style.Float />
-              }
-              error={!!error}
-              helperText={error ? error.message : null}
-              type='email'
-              autoComplete='new-password'
-            />
-          </FormControl>
-        )}
-        rules={{ required: 'First name required' }}
+    <Container>
+      <Input
+        mb='sm'
+        label='e-mail'
+        value={values.email}
+        onChange={(value) => setValue('email', value)}
+        iconLeft
+        Icon={<AiOutlineMail />}
+        ml='20px'
       />
-      <FormControl color='white'  >
-        <Style.Label htmlFor="outlined-adornment-password"><LockOpenIcon color='white' sx={{ mr: 2,  }} />senha</Style.Label>
-        <OutlinedInput
-          name='password'
-          sx={{ input: { color: '#ffffff'}}}
-          classes={classes}
-          type={show.showPassword ? 'text' : 'password'}
-          color="white"
-          value={props.values.password}
-          onChange={props.onChange}
-          label="senha senha"
-          endAdornment={
-            <InputAdornment position="end">
-              <IconButton
-                aria-label="toggle password visibility"
-                onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
-                edge="end"
-                 color='white'
-              >
-                {show.showPassword ? <VisibilityOff /> : <Visibility />}
-              </IconButton>
-            </InputAdornment>
-          }
-        />
-      </FormControl>
-    </form>
+      <Input
+        label='senha'
+        type='password'
+        value={values.password}
+        onChange={(value) => setValue('password', value)}
+        iconLeft
+        Icon={<AiOutlineLock />}
+        ml='20px'
+      />
+      <Button
+        variant='entrar'
+        mt='lg'
+        bg= 'secondary'
+        shadow='secondary'
+        onClick={onSubmit}
+      />
+    </Container>
   )
 }
+
+const Container = styled.div`
+  width: 100%;
+  padding: 20px 10px 20px;
+`

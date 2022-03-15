@@ -1,30 +1,22 @@
 import React from "react";
-import { makeStyles } from '@mui/styles';
+import styled from "styled-components";
 
-
-const useStyles = makeStyles((theme) => ({
-  backgroundPage: {
-    backgroundColor: theme.palette.primary.main,
-    padding: theme.spacing(1),
-    minHeight: '100vh',
-    justifyContent: 'center',
-    display: 'flex',
-    flexWrap: 'wrap',
-    alignItems: "center"
-  },
-  container:{
-  }
-}))
-
-export default function Public (props){
-
-  const classes = useStyles()
-
+export default (props) => {
   return(
-    <div className={classes.backgroundPage}>
-      <div className={classes.container}>
-        {props.children}
-      </div>
-    </div>
+    <Container>
+      {props.children}
+    </Container>
   )
 }
+
+const Container = styled.div`
+  min-height: 100vh;
+  width: 100%;
+  background: ${(p) => p.theme.colors.primary};
+  min-height: 100vh;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+`
