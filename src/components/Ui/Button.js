@@ -25,8 +25,8 @@ export default (props) => {
   }
 
   return(
-    <Button mt={mt} onClick={props.onClick} shadow={shadow} bg={bg} shadow={shadow} buttonSize={buttonSize}>
-      {props.variant}
+    <Button mt={mt}  onClick={props.onClick} shadow={shadow} bg={bg} shadow={shadow} buttonSize={buttonSize}>
+      {props.children}
     </Button>
   )
 }

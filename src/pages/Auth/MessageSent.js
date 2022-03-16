@@ -1,26 +1,35 @@
 import React from "react";
 import styled from "styled-components/macro";
 import Public from "../../components/layout/Public";
-import Form from '../../components/Auth/Forgot'
+import Form from '../../components/Auth/MessageSent'
+import Button from '../../components/Ui/Button'
 import Logo from '../../components/assets/img/logo.png'
 import Card, {CardStyle} from '../../components/Ui/Card'
-import {Link} from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 
 
 export default () => {
+  let history = useHistory();
+
+  const onSubmit = (data) =>{
+    history.push('/')
+  }
+
   return(
     <Public>
       <LogoContainer>
         <img src={Logo} />
       </LogoContainer>
       <CardContainer>
-        <Card bg='rgba(255 255 255 / 0%)' shadow='primary' cardSize='sm'>
+        <Card bg='rgba(255,255,255,0.01)' shadow='primary' cardSize='sm'>
           <Form />
         </Card>
       </CardContainer>
-      <LinkContainer>
-        <LinkCreate to="/">entrar</LinkCreate>
-      </LinkContainer>
+      <ButtonContainer>
+        <Button mt='lg' bg='secondary' shadow='secondary' onClick={onSubmit}>
+          voltar para login
+        </Button>
+      </ButtonContainer>
     </Public>
   )
 }
@@ -37,23 +46,7 @@ const CardContainer = styled.div`
   justify-content: center;
   display: flex;
 `
-
-const LinkContainer = styled.div`
-  width: 100%;
-  align-items: center;
-  flex-direction: column;
+const ButtonContainer = styled.div`
   display: flex;
-  margin-top: 40px;
-  flex-wrap: wrap;
-  text-align: center;
-  line-height: 1;
-`
-
-const LinkCreate = styled(Link)`
-  text-transform: uppercase;
-  color: #ffffff;
-  text-decoration: none;
-  font-weight: bold;
-  margin-bottom: 30px;
-  font-size: 18px;
+  width: 295px;
 `

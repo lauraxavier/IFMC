@@ -44,13 +44,9 @@ export default () => {
         Icon={<AiOutlineLock />}
         ml='20px'
       />
-      <Button
-        variant='entrar'
-        mt='lg'
-        bg= 'secondary'
-        shadow='secondary'
-        onClick={onSubmit}
-      />
+      <Button mt='lg' bg= 'secondary' shadow='secondary' onClick={onSubmit}>
+        entrar 
+      </Button>
     </Container>
   )
 }

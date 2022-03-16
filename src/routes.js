@@ -4,7 +4,7 @@ import {Switch, Route, BrowserRouter as Router} from "react-router-dom";
 import CreateAccount from './pages/Auth/Create.js';
 import Login from './pages/Auth/Login.js';
 import ForgotPassword from './pages/Auth/Forgot.js';
-import Recover from './pages/Auth/Recover.js';
+import MessageSent from './pages/Auth/MessageSent.js';
 
 
 
@@ -15,7 +15,7 @@ export default function mainRoutes(){
       <Route component = { Login }  path="/" exact/>
         <Route component = { CreateAccount }  path="/criar-conta" />
         <Route component = { ForgotPassword }  path="/recuper-senha" />
-        <Route component = { Recover }  path="/" />
+        <Route component = { MessageSent }  path="/mensagem-enviada" />
       </Switch>
     </Router>
 
