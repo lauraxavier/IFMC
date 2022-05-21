@@ -34,7 +34,7 @@ export default (props) => {
 const Button = styled.button`
   width: ${props => props.buttonSize};
   border-radius: 6px;
-  margin-top: ${props => props.mt};
+  margin-top: ${props => props.mt || 'none'};
   padding: 15px;
   outline: none;
 	text-decoration: none;

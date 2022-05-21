@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, {useTheme} from "styled-components/macro";
-import Check from '../../components/assets/img/check.png'
+import Check from '../../assets/img/check.png'
 
 
 export default (props) => {

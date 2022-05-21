@@ -2,19 +2,20 @@ import React from "react";
 import styled from "styled-components/macro";
 import Public from "../../components/layout/Public";
 import Form from '../../components/Auth/Login'
-import Logo from '../../components/assets/img/logo.png'
-import Card, {CardStyle} from '../../components/Ui/Card'
+import Logo from '../../assets/img/logo.png'
+import Card from '../../components/Ui/Card'
 import {Link} from "react-router-dom";
 
 
-export default () => {
+export default (...props) => {
+
   return(
     <Public>
       <LogoContainer>
         <img src={Logo} />
       </LogoContainer>
       <CardContainer>
-        <Card bg='rgba(255 255 255 / 0%)' shadow='primary' cardSize='sm'>
+        <Card shadow='primary' cardSize='sm'>
           <Form />
         </Card>
       </CardContainer>
