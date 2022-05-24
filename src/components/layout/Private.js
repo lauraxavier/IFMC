@@ -1,15 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import styled from "styled-components";
 
-export default (props) => {
-  return(
-    <div>
+const component = (props) => {
+  return <Container>{props.children}</Container>;
+};
 
+export default component;
 
-        <Link to='/'>Entrar</Link>
-      <Link to='/create'>Criar Conta</Link>
-      <Link to='/recover-password'>Recuperar senha</Link>
-      {props.children}
-    </div>
-  )
-}
+const Container = styled.div`
+  background: ${(p) => p.theme.colors.grey};
+  min-height: 100vh;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+`;

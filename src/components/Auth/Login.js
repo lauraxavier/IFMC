@@ -1,15 +1,20 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import Input from "../../components/Ui/Input";
-import Form from "../../components/Ui/Form";
 import Button from "../../components/Ui/Button";
 import * as Style from './Style'
 import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
+import * as yup from 'yup'
+import {yupResolver} from '@hookform/resolvers/yup'
+
+let schema = yup.object().shape({
+  email: yup.string().email().required(),
+  password: yup.string().required().min(8),
+});
 
 export default (props) => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm({resolver: yupResolver(schema)});
   const onSubmit = data => console.log(data);
-  console.log(errors)
 
   return (
     <Style.Container>
@@ -21,9 +26,10 @@ export default (props) => {
           iconLeft
           Icon={<AiOutlineMail />}
           ml="20px"
-          ref={register("email", {required: true})}
+          ref={register("email")}
         />
         {errors.email && errors.email.type === "required" && <Style.ErrorMessage>Campo obrigatório!</Style.ErrorMessage>}
+        {errors.email && errors.email.type === "email" && <Style.ErrorMessage>Formato de e-mail inválido!</Style.ErrorMessage>}
         <Input
           name="password"
           label="senha"
@@ -31,9 +37,10 @@ export default (props) => {
           iconLeft
           Icon={<AiOutlineLock />}
           ml="20px"
-          ref={register("password", {required: true})}
+          ref={register("password")}
         />
         {errors.password && errors.password.type === "required" && <Style.ErrorMessage>Campo obrigatório!</Style.ErrorMessage>}
+        {errors.password && errors.password.type === "min" && <Style.ErrorMessage>Senha muito curta - deve ter no mínimo 8 caracteres.</Style.ErrorMessage>}
         <Button
           bg="secondary"
           shadow="secondary"

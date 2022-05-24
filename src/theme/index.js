@@ -4,6 +4,7 @@ const theme = {
     secondary: "#F71B6C",
     success: "#00D7B0",
     white: "#ffffff",
+    grey: "#EDE7E7",
   },
   spacing: {
     xs: "4px",

@@ -5,7 +5,12 @@ import Button from '../../components/Ui/Button'
 import * as Style from './Style'
 import { AiOutlineMail, AiOutlineLock, AiOutlineUser } from "react-icons/ai";
 import { useHistory } from 'react-router-dom';
+import * as yup from 'yup'
+import {yupResolver} from '@hookform/resolvers/yup'
 
+let schema = yup.object().shape({
+  email: yup.string().email().required(),
+});
 
 export default (props) => {
   let history = useHistory();
@@ -13,7 +18,7 @@ export default (props) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({resolver: yupResolver(schema)});
 
   const onSubmit = (data) =>{
     console.log(data);
@@ -30,9 +35,10 @@ export default (props) => {
           iconLeft
           Icon={<AiOutlineMail />}
           ml="20px"
-          ref={register("email", {required: true})}
+          ref={register("email")}
         />
         {errors.email && errors.email.type === "required" && <Style.ErrorMessage>Campo obrigatório!</Style.ErrorMessage>}
+        {errors.email && errors.email.type === "email" && <Style.ErrorMessage>Formato de e-mail inválido!</Style.ErrorMessage>}
         <Button
           bg="secondary"
           shadow="secondary"

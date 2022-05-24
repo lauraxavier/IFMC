@@ -5,6 +5,7 @@ import CreateAccount from "./pages/Auth/Create.js";
 import Login from "./pages/Auth/Login.js";
 import ForgotPassword from "./pages/Auth/Forgot.js";
 import MessageSent from "./pages/Auth/MessageSent.js";
+import Dashboard from "./pages/Dashboard";
 
 export default function mainRoutes() {
   return (
@@ -14,6 +15,7 @@ export default function mainRoutes() {
         <Route component={CreateAccount} path="/criar-conta" />
         <Route component={ForgotPassword} path="/recuper-senha" />
         <Route component={MessageSent} path="/mensagem-enviada" />
+        <Route component={Dashboard} path="/dashboard" />
       </Switch>
     </Router>
   );

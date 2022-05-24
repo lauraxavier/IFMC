@@ -3,8 +3,9 @@ import styled, { useTheme } from "styled-components/macro";
 import { IconContext } from "react-icons";
 import { useForm } from "react-hook-form";
 
-export default React.forwardRef((props, { register, name, ...rest }) => {
-  const isActive = props.value != "";
+export default React.forwardRef((props, { register,setValue, name, ...rest }) => {
+
+  const isActive = props.data != "";
   const iconLeft = props.iconLeft;
   const Icon = props.Icon;
   const theme = useTheme();
@@ -15,10 +16,9 @@ export default React.forwardRef((props, { register, name, ...rest }) => {
   }
 
   return (
-    <Container label={props.label} mb={mb}>
+    <Container mb={mb}>
       <Input
         className={iconLeft ? "InputIconL" : ""}
-        value={props.value}
         type={props.type}
         name={name}
         ref={register}
@@ -31,7 +31,7 @@ export default React.forwardRef((props, { register, name, ...rest }) => {
           </IconContext.Provider>
         </IconContainer>
       )}
-      <Label ml={ml} className={isActive ? "Active" : ""}>
+      <Label label={props.label} ml={ml} className={isActive ? "Active" : ""}>
         {props.label}
       </Label>
     </Container>
@@ -46,8 +46,10 @@ const Container = styled.div`
   & .Active {
     transform: translate(4px, -5px) scale(0.95);
     font-size: 14px;
-    background: #381aae;
+    background: #381aae!important;
     padding: 0 12px;
+    margin-left: 0;
+    top:-1px;
   }
   margin-bottom: 20px;
   & .InputIconL {
@@ -73,22 +75,27 @@ const Input = styled.input`
 `;
 
 const Label = styled.label`
-  padding: 0 17px;
   color: #ffffff;
-  pointer-events: none;
   position: absolute;
-  transform: translate(0, 16px) scale(1);
+  top: 23px;
+  background: none!important;
   transform-origin: top left;
   transition: all 0.2s ease-out;
   margin-left: ${(props) => props.ml};
+  transform: translate(4px, -5px) scale(0.95);
+  font-size: 14px;
+  padding: 0 12px ;
   ${Input}:focus ~ & {
     transform: translate(4px, -5px) scale(0.95);
     font-size: 14px;
-    background: #381aae;
+    background: #381aae!important;
     padding: 0 12px;
     margin-left: 0;
+    top:-1px;
   }
 `;
+
+
 
 const IconContainer = styled.div`
   position: absolute;
